@@ -1,6 +1,5 @@
 import os
 import json
-import get_key
 from googleapiclient.discovery import build
 
 
@@ -13,7 +12,17 @@ class Channel:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.channel_id = channel_id
         self.channel = self.youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
+        self.title = ''
+        self.video_count = 0
+        self.url = ''
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         print(json.dumps(self.channel, indent=2, ensure_ascii=False))
+
+    def to_json(self, path):
+        pass
+
+    @classmethod
+    def get_service(cls):
+        return cls.youtube
