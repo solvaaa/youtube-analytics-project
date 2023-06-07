@@ -49,7 +49,18 @@ class Channel:
         print(json.dumps(self.channel, indent=2, ensure_ascii=False))
 
     def to_json(self, path):
-        pass
+        attributes = {
+            'channel_id': self.channel_id,
+            'title': self.title,
+            'description': self.description,
+            'subscriber_count': self.subscriber_count,
+            'video_count': self.video_count,
+            'view_count': self.view_count,
+            'url': self.url
+        }
+        output_string = json.dumps(attributes)
+        with open(path, 'w', encoding='utf-8') as json_file:
+            json_file.write(output_string)
 
     @classmethod
     def get_service(cls):
