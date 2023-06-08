@@ -13,34 +13,40 @@ class Channel:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.__channel_id = channel_id
         self.channel = self.youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
+        self.__title = self.channel['items'][0]['snippet']['title']
+        self.__description = self.channel['items'][0]['snippet']['description']
+        self.__subscriber_count = self.channel['items'][0]['statistics']['subscriberCount']
+        self.__video_count = int(self.channel['items'][0]['statistics']['videoCount'])
+        self.__view_count = int(self.channel['items'][0]['statistics']['viewCount'])
+        self.__url = 'https://www.youtube.com/channel/' + self.channel_id
+
 
     @property
     def channel_id(self):
         return self.__channel_id
     @property
     def title(self):
-        return self.channel['items'][0]['snippet']['title']
+        return self.__title
 
     @property
     def description(self):
-        return self.channel['items'][0]['snippet']['description']
+        return self.__description
 
     @property
     def subscriber_count(self):
-        return self.channel['items'][0]['statistics']['subscriberCount']
+        return self.__subscriber_count
 
     @property
     def video_count(self):
-        return int(self.channel['items'][0]['statistics']['videoCount'])
+        return self.__video_count
 
     @property
     def view_count(self):
-        return int(self.channel['items'][0]['statistics']['viewCount'])
+        return self.__view_count
 
     @property
     def url(self):
-        url_ = 'https://www.youtube.com/channel/'
-        return url_ + self.channel_id
+        return self.__url
 
 
 
