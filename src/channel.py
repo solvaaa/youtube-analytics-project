@@ -18,7 +18,7 @@ class Channel:
         self.__subscriber_count = self.channel['items'][0]['statistics']['subscriberCount']
         self.__video_count = int(self.channel['items'][0]['statistics']['videoCount'])
         self.__view_count = int(self.channel['items'][0]['statistics']['viewCount'])
-        self.__url = 'https://www.youtube.com/channel/' + self.channel_id
+        self.__url = 'https://www.youtube.com/channel/' + channel_id
 
 
     @property
