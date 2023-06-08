@@ -1,7 +1,6 @@
 import os
 import json
 from googleapiclient.discovery import build
-from pprint import pprint
 
 
 class Channel:
