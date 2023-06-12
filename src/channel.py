@@ -77,3 +77,21 @@ class Channel:
 
     def __sub__(self, other):
         return self.__subscriber_count - other.__subscriber_count
+
+    def __lt__(self, other):
+        return self.__subscriber_count < other.__subscriber_count
+
+    def __le__(self, other):
+        return self.__subscriber_count <= other.__subscriber_count
+
+    def __gt__(self, other):
+        return self.__subscriber_count > other.__subscriber_count
+
+    def __ge__(self, other):
+        return self.__subscriber_count >= other.__subscriber_count
+
+    def __eq__(self, other):
+        return self.__subscriber_count == other.__subscriber_count
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
