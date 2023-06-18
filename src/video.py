@@ -25,5 +25,13 @@ class Video():
     def video_id(self):
         return self.__video_id
 
+
 class PLVideo(Video):
-    ...
+
+    def __init__(self, video_id, playlist_id):
+        super().__init__(video_id)
+        self.__playlist_id = playlist_id
+
+    @property
+    def playlist_id(self):
+        return self.__playlist_id
