@@ -2,7 +2,6 @@ import datetime
 import os
 import isodate
 from googleapiclient.discovery import build
-from pprint import pprint
 import datetime
 
 class PlayList:
@@ -12,17 +11,17 @@ class PlayList:
 
     def __init__(self, playlist_id):
         self.playlist_id = playlist_id
+        self.playlist = self.youtube.playlists().list(id=self.playlist_id, part='snippet').execute()
         self.playlist_videos = self.youtube.playlistItems().list(playlistId=playlist_id,
                                                part='contentDetails,snippet',
                                                maxResults=50,
                                                ).execute()
-
         video_ids = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
         self.video_response = self.youtube.videos().list(part='contentDetails,statistics',
                                                id=','.join(video_ids)
                                                ).execute()
         self.url = 'https://www.youtube.com/playlist?list=' + playlist_id
-        self.title = self.playlist_videos['items'][0]['snippet']['title'].split('.')[0]
+        self.title = self.playlist['items'][0]['snippet']['title']
 
     @property
     def total_duration(self):
